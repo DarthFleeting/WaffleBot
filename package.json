@@ -1,0 +1,25 @@
+{
+  "name": "wafflebot",
+  "version": "1.0.0",
+  "description": "Waffles",
+  "main": "Main.js",
+  "dependencies": {
+    "cloud-ffmpeg": "^1.0.8",
+    "discord.js": "^11.2.1",
+    "fluent-ffmpeg": "^2.1.2",
+    "form-data": "^2.3.1",
+    "opusscript": "0.0.3",
+    "youtube-search": "^1.0.10",
+    "ytdl-core": "^0.17.1"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": "8.4.0",
+    "npm": "5.4.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "DarthFleeting and Sei4or",
+  "license": "ISC"
+}
