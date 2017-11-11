@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const YTDL = require("ytdl-core");
 
-const TOKEN = "MzUzNjk5MzI3NTk3NjA4OTcy.DKdXnA.ooJfgBfp8zc2rOSg8sss6YMZy5A";
+const TOKEN = "MznzNjk5gzI3NTk31jA4OTcy.DKdXnA.oocfgBfp8zc2rOSg8ss16YMZy5A";
 const prefix = "~~"
 const Version = "0.5.1"
 
