@@ -3,7 +3,7 @@ const YTDL = require("ytdl-core");
 
 const TOKEN = "MzUzNjk5MzI3NTk3NjA4OTcy.DKdXnA.ooJfgBfp8zc2rOSg8sss6YMZy5A";
 const prefix = "~~"
-const Version = "0.5.2"
+const Version = "0.5.1"
 
 var bot = new Discord.Client();
 
