@@ -1,17 +1,24 @@
+/**
+ * Creates a connection with Discord in order to handle interactions.
+ * @author: Darthfleeting
+*/
+
+//Dependencies
 const Discord = require("discord.js");
 const YTDL = require("ytdl-core");
+const search = require('youtube-search');
 const Settings = require("./settings.json");
 
+//Settings
 const TOKEN = Settings.token;
 const prefix = Settings.prefix;
 const version = Settings.version
 
-var bot = new Discord.Client();
+//Runtime variables
+let bot = new Discord.Client();
 
 var Currentsong = []
 var servers = {};
-
-var search = require('youtube-search');
 
 var opts = {
  maxResults: 1,
@@ -20,7 +27,7 @@ var opts = {
 
 /**
  * @deprecated YTDL isn't efficient and is old. Playing music will most likely not work.
- */
+*/
 function play(connection,message) {
     var server = servers[message.guild.id];
 
@@ -35,6 +42,7 @@ function play(connection,message) {
     Currentsong.shift();
 }
 
+//Register listeners
 bot.on("ready", () => {
     console.log("Ready");
     bot.user.setPresence({ game: { name: `${prefix} / Version ${version}`, type: 0 }, })
