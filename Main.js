@@ -4,7 +4,7 @@ const Settings = require("./settings.json");
 
 const TOKEN = Settings.token;
 const prefix = Settings.prefix;
-const Version = "0.5.1"
+const Version = Settings.version
 
 var bot = new Discord.Client();
 
