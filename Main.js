@@ -1,12 +1,12 @@
 const Discord = require("discord.js");
 const YTDL = require("ytdl-core");
+const Settings = require("./settings.json");
 
-const TOKEN = "MznzNjk5gzI3NTk31jA4OTcy.DKdXnA.oocfgBfp8zc2rOSg8ss16YMZy5A";
-const prefix = "~~"
+const TOKEN = Settings.token;
+const prefix = Settings.prefix;
 const Version = "0.5.1"
 
 var bot = new Discord.Client();
-
 
 var Currentsong = []
 var servers = {};
