@@ -1,4 +1,5 @@
 {
   "token": "token. Ignore settings when updating github.",
-  "prefix": "~~"
+  "prefix": "~~",
+  "ytsearchkey": "key."
 }
