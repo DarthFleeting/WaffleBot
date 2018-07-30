@@ -15,7 +15,7 @@ var search = require('youtube-search');
 
 var opts = {
  maxResults: 1,
- key: 'AIzaSyDYr_PX04qS5OiDxgwql_rwj6__ee3n22o'
+ key: Settings.ytsearchkey
 };
 
 function play(connection,message) {
