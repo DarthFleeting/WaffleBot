@@ -18,6 +18,9 @@ var opts = {
  key: Settings.ytsearchkey
 };
 
+/**
+ * @deprecated YTDL isn't efficient and is old. Playing music will most likely not work.
+ */
 function play(connection,message) {
     var server = servers[message.guild.id];
 
@@ -32,28 +35,27 @@ function play(connection,message) {
     Currentsong.shift();
 }
 
-bot.on("ready", function() {
+bot.on("ready", () => {
     console.log("Ready");
     bot.user.setPresence({ game: { name: `${prefix} / Version ${version}`, type: 0 }, })
 });
 
-bot.on("message", function(message) {
-    if (message.author.equals(bot.user)) return;
-
+bot.on("message", message => {
+    if (message.author.bot) return;
+    //if (message.author.equals(bot.user)) return;
     if (!message.content.startsWith(prefix)) return;
 
-    var args = message.content.substring(prefix.length).split(" ");
+    const args = message.content.substring(prefix.length).split(" ");
 
     switch (args[0].toLowerCase()) {
     case "waffles":
         message.channel.send("Waffles.", {
             file: "http://az616578.vo.msecnd.net/files/2016/04/22/6359688785958691901336655616_waffle1.JPG"
-        })
+        });
         break;
-    case "Confirm":
-      if(message.author.equals(DarthFleeting)
-        message.channel.send("Confirmed.")
-          break;
+    case "confirm":
+        if (message.author.equals(DarthFleeting) message.channel.send("Confirmed.");
+        break;
     case "waffle":
         message.channel.send("Waffles.", {
             file: "http://az616578.vo.msecnd.net/files/2016/04/22/6359688785958691901336655616_waffle1.JPG"
@@ -128,7 +130,10 @@ bot.on("message", function(message) {
         }
         break;
     default:
-    message.channel.send("Not a command! Eat some waffles fool.")
+      /*
+        Bad practice to respond with unknown commands.
+        message.channel.send("Not a command! Eat some waffles fool.");
+      */
     }
 });
 
