@@ -1,23 +1,33 @@
+/**
+ * Creates a connection with Discord in order to handle interactions.
+ * @author: Darthfleeting
+*/
+
+//Dependencies
 const Discord = require("discord.js");
 const YTDL = require("ytdl-core");
+const search = require('youtube-search');
+const Settings = require("./settings.json");
 
-const TOKEN = "MznzNjk5gzI3NTk31jA4OTcy.DKdXnA.oocfgBfp8zc2rOSg8ss16YMZy5A";
-const prefix = "~~"
-const Version = "0.5.1"
+//Settings
+const TOKEN = Settings.token;
+const prefix = Settings.prefix;
+const version = Settings.version
 
-var bot = new Discord.Client();
-
+//Runtime variables
+let bot = new Discord.Client();
 
 var Currentsong = []
 var servers = {};
 
-var search = require('youtube-search');
-
 var opts = {
  maxResults: 1,
- key: 'AIzaSyDYr_PX04qS5OiDxgwql_rwj6__ee3n22o'
+ key: Settings.ytsearchkey
 };
 
+/**
+ * @deprecated YTDL isn't efficient and is old. Playing music will most likely not work.
+*/
 function play(connection,message) {
     var server = servers[message.guild.id];
 
@@ -32,54 +42,54 @@ function play(connection,message) {
     Currentsong.shift();
 }
 
-bot.on("ready", function() {
+//Register listeners
+bot.on("ready", () => {
     console.log("Ready");
-    bot.user.setPresence({ game: { name: "Waffles ~~ " + Version, type: 0 }, })
+    bot.user.setPresence({ game: { name: `${prefix} / Version ${version}`, type: 0 }, })
 });
 
-bot.on("message", function(message) {
-    if (message.author.equals(bot.user)) return;
-
+bot.on("message", message => {
+    if (message.author.bot) return;
+    //if (message.author.equals(bot.user)) return;
     if (!message.content.startsWith(prefix)) return;
 
-    var args = message.content.substring(prefix.length).split(" ");
+    const args = message.content.substring(prefix.length).split(" ");
 
     switch (args[0].toLowerCase()) {
     case "waffles":
         message.channel.send("Waffles.", {
             file: "http://az616578.vo.msecnd.net/files/2016/04/22/6359688785958691901336655616_waffle1.JPG"
-        })
+        });
         break;
-    case "Confirm":
-      if(message.author.equals(DarthFleeting)
-        message.channel.send("Confirmed.")
-          break;
+    case "confirm":
+        if (message.author.equals(DarthFleeting) message.channel.send("Confirmed.");
+        break;
     case "waffle":
-    message.channel.send("Waffles.", {
-        file: "http://az616578.vo.msecnd.net/files/2016/04/22/6359688785958691901336655616_waffle1.JPG"
-    })
-    break;
+        message.channel.send("Waffles.", {
+            file: "http://az616578.vo.msecnd.net/files/2016/04/22/6359688785958691901336655616_waffle1.JPG"
+        });
+        break;
     case "pancake":
-      message.channel.send("Must have autocorrected.", {
-        file: "http://cdn.pcwallart.com/images/waffles-with-syrup-wallpaper-3.jpg"
-      })
+        message.channel.send("Must have autocorrected.", {
+          file: "http://cdn.pcwallart.com/images/waffles-with-syrup-wallpaper-3.jpg"
+        });
         break;
     case "ping":
-    async function ping(message) {
-    let pingMessage = await message.channel.send('Pinging...');
-    pingMessage.edit(`Pong? | Took **${Math.abs(pingMessage.createdTimestamp - message.createdTimestamp)} ms**... I think.`);
-}
+        async function ping() {
+          let pingMessage = await message.channel.send('Pinging...');
+          pingMessage.edit(`Pong? | Took **${Math.abs(pingMessage.createdTimestamp - message.createdTimestamp)} ms**... I think.`);
+        }
 
-ping(message);
+        ping();
         break;
     case "quote":
-      message.channel.send("We have to remember what's important in life. Waffles, friends, and work. In that order.")
+        message.channel.send("We have to remember what's important in life. Waffles, friends, and work. In that order.")
         break;
     case "kick":
-      message.channel.send("User was kicked. Well, I actually don't have that power, but it would be cool if I did!")
+        message.channel.send("User was kicked. Well, I actually don't have that power, but it would be cool if I did!")
         break;
     case "help":
-      message.author.send("Waffles can help! \n ''~~help' gets you help. \n ''~~ping' gets your ping! \n ''~~waffle(s)' gets you some waffles! \n ''~~kick (mention)' kicks the mentioned person!")
+        message.author.send("Waffles can help! \n ''~~help' gets you help. \n ''~~ping' gets your ping! \n ''~~waffle(s)' gets you some waffles! \n ''~~kick (mention)' kicks the mentioned person!")
         break;
     case "play":
         if (!args[1]) {
@@ -128,7 +138,10 @@ ping(message);
         }
         break;
     default:
-    message.channel.send("Not a command! Eat some waffles fool.")
+      /*
+        Bad practice to respond with unknown commands.
+        message.channel.send("Not a command! Eat some waffles fool.");
+      */
     }
 });
 
