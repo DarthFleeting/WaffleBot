@@ -1,1 +1,1 @@
-# WaffleBot
+# WaffleBot for Danktronics Chat
